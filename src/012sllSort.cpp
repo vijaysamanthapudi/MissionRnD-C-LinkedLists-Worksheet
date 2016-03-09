@@ -21,6 +21,33 @@ struct node {
 	struct node *next;
 };
 
-void sll_012_sort(struct node *head){
+void sll_012_sort(struct node *head)
+{
+	if (head == NULL)
+	{
+		return;
+	}
+	int a[3] = { 0 },i=0;     //hashing technique used to store the frequency of each integer
+	struct node *curr = head;
+	while (head)
+	{
+		a[head->data]++;
+		head = head->next;
+	}
+	while (curr&&i<3)
+	{
+		if (a[i] > 0)
+		{
+			curr->data = i;
+			a[i]--;
+			curr = curr->next;
+		}
+		else
+		{
+			i++;
+		}
+	}
+
+
 	
 }
