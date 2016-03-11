@@ -20,25 +20,41 @@ struct node {
 
 struct node * removeEveryKthNode(struct node *head, int K) 
 {
-	int i = 1;
-	if (head == NULL || K <= 0)
+	
+	if (head == NULL || K <= 1)
 	{
 		return NULL;
 	}
-	else
-	{
-		while (head)
+	int i = 2;
+	struct node *prev = head;
+	struct node *curr = head->next;
+	
+		while (prev && curr)
 		{
-			if (i%K == 0)
+			if (i%K == 0 && curr->next)
 			{
-				head->next = head->next->next;
-				i++;
+				//struct node *temp = curr;
+				prev->next = curr->next;
+				prev = curr;
+				curr = prev->next;
+
+				//printf("%d is deleted", curr->num);
+				//free(temp);
+			}
+			else if (i%K == 0 && curr->next == NULL)
+			{
+				prev->next = NULL;
 			}
 			else
 			{
-				head = head->next;
-				i++;
+
+				prev = prev->next;
+				curr = curr->next;
 			}
+			i = i + 1;
+
 		}
-	}
+
+	
+	return head;
 }
